@@ -1,0 +1,26 @@
+name: Autograding Tests
+on:
+  - repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install Haskell
+        uses: haskell-actions/setup@v2
+        with:
+          ghc-version: "9.6.6" # Exact version of ghc to use
+          enable-stack: true
+          stack-version: "latest"
+      - name: Install dependencies
+        run: stack build --only-dependencies
+      - name: Build the project
+        run: stack build
+      - name: Run tests
+        run: stack test

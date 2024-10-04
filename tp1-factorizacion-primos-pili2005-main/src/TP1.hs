@@ -14,16 +14,18 @@ divide x y = if x `mod` y == 0 then True else False
 -- | Dado un número X, retorna la lista de todos los divisores de X.
 -- Ej: divisores 10 = [1,2,5,10]
 divisores :: Int -> [Int]
-divisores = undefined
+divisores 1 = [1]
+divisores x = [n | n <- [2..x], x `mod` n == 0]
 
 -- | Dado un número, determina si es un número primo.
 esPrimo :: Int -> Bool
-esPrimo = undefined
+esPrimo x = if divisores x == [1,x] then True else False
 
 -- | Dado un número X, retorna la lista de todos los divisores primos de X.
 -- Ej: divisoresPrimos 10 = [2,5]
 divisoresPrimos :: Int -> [Int]
-divisoresPrimos = undefined
+divisoresPrimos 1 = []
+divisoresPrimos x = [p | p <- divisores x , esPrimo p] 
 
 -- | Dada una lista de números, comprime la lista contando las repeticiones adyacentes.
 -- Ej: comprimir [2,2,2,5,2,2] = [(2,3), (5,1), (2,2)]

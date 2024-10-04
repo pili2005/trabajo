@@ -1,12 +1,15 @@
 {-- Este modulo provee las funcionalidades basicas del TP, se deben implementar todas las funciones
     que estan indefinidas.
 -}
+-- Nombre: Pilar Gallardo
+-- DNI : 46375589
+-- Comision : 2
 
 module TP1 (factorizar, divide, divisores, esPrimo, divisoresPrimos, comprimir) where
 
 -- | Dados dos enteros X e Y, retorna True si X divide a Y, caso contrario False
 divide :: Int -> Int -> Bool
-divide = undefined
+divide x y = if x `mod` y == 0 then True else False   
 
 -- | Dado un número X, retorna la lista de todos los divisores de X.
 -- Ej: divisores 10 = [1,2,5,10]

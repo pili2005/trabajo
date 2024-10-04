@@ -15,6 +15,7 @@ divide x y = if x `mod` y == 0 then True else False
 -- | Dado un número X, retorna la lista de todos los divisores de X.
 -- Ej: divisores 10 = [1,2,5,10]
 divisores :: Int -> [Int]
+divisores 1 = [1]
 divisores x = [n | n <- [1..x], x `mod` n == 0]
 
 -- | Dado un número, determina si es un número primo.
@@ -33,6 +34,10 @@ comprimir :: [Int] -> [(Int, Int)]
 comprimir [] = []
 comprimir (x:xs) = contador x 1 xs
 
+-- f aux 
+-- dada un numero, un contador, y una lista de numeros, cuenta la cantidad
+-- de veces que se repite cada numero en la lista, (num, cont)
+-- Ej: contador 2 0 [2,2,2,3,4] = [(2,3),(3,1)(4,1)]
 contador :: Int -> Int -> [Int] -> [(Int,Int)]
 contador num cont [] = [(num,cont)]
 contador num cont (y:ys)
@@ -44,4 +49,11 @@ contador num cont (y:ys)
 -- Implementar usando las funciones previas, funciones definidas en Haskell y toda otra función auxiliar que sea necesaria.
 -- Ej: factorizar 118800 = [(2,4),(3,3),(5,2),(11,1)]
 factorizar :: Int -> [(Int,Int)]
-factorizar = undefined
+factorizar x = comprimir (factorizarPrimos x)
+
+-- f auximliar que dada una n devuelve una lista de su factorizacion en numeros primos 
+factorizarPrimos :: Int -> [Int]
+factorizarPrimos 1 = []
+factorizarPrimos n = divisor : factorizarPrimos (n `div` divisor)
+        where divisor = head (filter (>1) (divisores n))
+        
